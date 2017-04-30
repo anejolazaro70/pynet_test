@@ -1,3 +1,3 @@
 # pynet_test
 
-Añadiendo un comentario
+Añadiendo un comentario desde PC
