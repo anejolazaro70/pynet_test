@@ -1,0 +1,100 @@
+Trabajar con ramas en GitHub
+
+1. Para crear una nueva rama se utiliza el comando "git branch <nombre_rama>
+2. Para mostrar las ramas que existen se utiliza el comando "git branch"
+3. Para cambar de rama se utiliza el comando "git checkout <nombre_branch>
+Una nueva rama nos permite hacer un mejor seguimiento de los cambios realizados. Los cambios
+realizados desde el cambio de rama quedan vinculados a la nueva rama. Por ejemplo,
+master --> commit5 --> commit4 --> commit3 --> commit2 --> commit1
+<nombre_rama> --> commit7 --> commit6
+Incluso la estructura de directorios y listado de ficheros asociados a una rama se corresponden
+con los cambios realizados por los comandos "git add" y "git commit" que fueron creados, modificados y borrados después de realizar el cambio de rama con el comando "git checkout". Por ejemplo, 
+
+jose@jose-VirtualBox:~/pynet_test$ 
+jose@jose-VirtualBox:~/pynet_test$ 
+jose@jose-VirtualBox:~/pynet_test$ 
+jose@jose-VirtualBox:~/pynet_test$ vi python_for.py
+jose@jose-VirtualBox:~/pynet_test$ more python_for.py
+for i in range(10):
+    print i
+jose@jose-VirtualBox:~/pynet_test$ python pyrhon_for.py
+python: can't open file 'pyrhon_for.py': [Errno 2] No such file or directory
+jose@jose-VirtualBox:~/pynet_test$ python python_for.py
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+jose@jose-VirtualBox:~/pynet_test$ ls
+LICENSE  prueba.py  python_for.py  README.md
+jose@jose-VirtualBox:~/pynet_test$ ls
+LICENSE  prueba.py  python_for.py  README.md
+jose@jose-VirtualBox:~/pynet_test$ mkdir net_test
+jose@jose-VirtualBox:~/pynet_test$ cd net_test
+jose@jose-VirtualBox:~/pynet_test/net_test$ ls
+jose@jose-VirtualBox:~/pynet_test/net_test$ vi __init__.py
+jose@jose-VirtualBox:~/pynet_test/net_test$ ls
+__init__.py
+jose@jose-VirtualBox:~/pynet_test/net_test$ ls -al
+total 8
+drwxrwxr-x 2 jose jose 4096 abr 30 10:20 .
+drwxrwxr-x 4 jose jose 4096 abr 30 10:19 ..
+-rw-rw-r-- 1 jose jose    0 abr 30 10:20 __init__.py
+jose@jose-VirtualBox:~/pynet_test/net_test$ cd ..
+jose@jose-VirtualBox:~/pynet_test$ git add python_for.py
+jose@jose-VirtualBox:~/pynet_test$ git commit -m "Añadiendo fichero python for loop"
+[dev 46bcba9] Añadiendo fichero python for loop
+ 1 file changed, 2 insertions(+)
+ create mode 100644 python_for.py
+jose@jose-VirtualBox:~/pynet_test$ git add net_test/
+jose@jose-VirtualBox:~/pynet_test$ git commit -m "Añadiendo directorio net_test"[dev 2e1f101] Añadiendo directorio net_test
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 net_test/__init__.py
+jose@jose-VirtualBox:~/pynet_test$ git status
+En la rama dev
+nothing to commit, working directory clean
+jose@jose-VirtualBox:~/pynet_test$ ls
+LICENSE  net_test  prueba.py  python_for.py  README.md
+jose@jose-VirtualBox:~/pynet_test$ ls -al
+total 44
+drwxrwxr-x  4 jose jose  4096 abr 30 10:19 .
+drwxr-xr-x 19 jose jose  4096 abr 30 10:11 ..
+drwxrwxr-x  8 jose jose  4096 abr 30 10:22 .git
+-rw-rw-r--  1 jose jose  1045 abr 30 08:19 .gitignore
+-rw-rw-r--  1 jose jose 11357 abr 30 08:19 LICENSE
+drwxrwxr-x  2 jose jose  4096 abr 30 10:20 net_test
+-rw-rw-r--  1 jose jose    40 abr 30 09:06 prueba.py
+-rw-rw-r--  1 jose jose    32 abr 30 10:18 python_for.py
+-rw-rw-r--  1 jose jose    48 abr 30 09:29 README.md
+jose@jose-VirtualBox:~/pynet_test$ git checkout master
+Switched to branch 'master'
+Su rama está actualizada con «origin/master».
+jose@jose-VirtualBox:~/pynet_test$ git branch
+  dev
+* master
+jose@jose-VirtualBox:~/pynet_test$ git status
+En la rama master
+Su rama está actualizada con «origin/master».
+nothing to commit, working directory clean
+jose@jose-VirtualBox:~/pynet_test$ ls -al
+total 36
+drwxrwxr-x  3 jose jose  4096 abr 30 10:25 .
+drwxr-xr-x 19 jose jose  4096 abr 30 10:11 ..
+drwxrwxr-x  8 jose jose  4096 abr 30 10:25 .git
+-rw-rw-r--  1 jose jose  1045 abr 30 08:19 .gitignore
+-rw-rw-r--  1 jose jose 11357 abr 30 08:19 LICENSE
+-rw-rw-r--  1 jose jose    40 abr 30 09:06 prueba.py
+-rw-rw-r--  1 jose jose    48 abr 30 09:29 README.md
+jose@jose-VirtualBox:~/pynet_test$ 
+
+No aparecen los mismos ficheros y directorios cuando se ejecuta el comando "ls -al" siendo la rama
+activa "master" y siendo la rama activa "dev". Esto permite hacer un seguimiento detallado de 
+cuáles eran los ficheros y estructura del directorio en cada momento.
+
+4. Es posible mantener y fusionar los cambios realizados en dos ramas distintas para disponer de una única rama de cambios. El comando utilizado es "git merge <nombre_rama>" desde la rama "master"
+
